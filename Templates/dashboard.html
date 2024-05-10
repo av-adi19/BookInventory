@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .actions a, .actions input[type="submit"] {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            margin-right: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .actions a:hover, .actions input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .add-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .add-link a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .add-link a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Inventory</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>ISBN</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+            <td>{{ book[3] }}</td>
+            <td>{{ book[4] }}</td>
+            <td>{{ book[5] }}</td>
+            <td>{{ book[6] }}</td>
+            <td class="actions">
+                <a href="/edit/{{ book[0] }}">Edit</a>
+                <form action="/delete/{{ book[0] }}" method="POST" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="add-link">
+        <a href="/add">Add Book</a>
+    </div>
+</body>
+</html>
